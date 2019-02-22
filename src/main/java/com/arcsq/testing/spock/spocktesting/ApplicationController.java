@@ -9,9 +9,18 @@ public class ApplicationController {
     @Autowired
     ApplicationService applicationService;
 
-    @GetMapping("/callService/{id}")
-    public String callForService(@PathVariable String id) {
-        return applicationService.performBusinessFunction(id);
+    @GetMapping("/check-discount/{id}")
+    public String checkDiscount(@PathVariable String id) {
+        String stateName = applicationService.performBusinessFunction(id);
+        if ("Georgia".equals(stateName)) {
+            return "Discount 30%";
+        }
+        else if ("Ohio".equals(stateName)) {
+            return "Discount 10%";
+        }
+        else {
+            return "You don't qualify discount";
+        }
     }
 
 }

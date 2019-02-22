@@ -15,9 +15,9 @@ class ApplicationServiceTest extends Specification {
 
         where:
         id      | result
-        "day"   | "Monday"
-        "year"  | "2019"
-        "Else"  | "None"
+        "GA"   | "Georgia"
+        "OH"  | "Ohio"
+        "IL"  | "Other"
     }
 
 }

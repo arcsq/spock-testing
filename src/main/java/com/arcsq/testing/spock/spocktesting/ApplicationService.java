@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 public class ApplicationService {
 
     public String performBusinessFunction(String id) {
-        if ("day".equals(id)) {
-            return "Monday";
+        if ("GA".equals(id)) {
+            return "Georgia";
         }
-        else if ("year".equals(id)) {
-            return "2019";
+        else if ("OH".equals(id)) {
+            return "Ohio";
         }
-        return "None";
+        return "Other";
     }
 
 }
