@@ -11,16 +11,31 @@ public class ApplicationController {
 
     @GetMapping("/check-discount/{id}")
     public String checkDiscount(@PathVariable String id) {
-        String stateName = applicationService.performBusinessFunction(id);
-        if ("Georgia".equals(stateName)) {
+        String stateName = applicationService.getStateCode(id);
+        if ("GA".equals(stateName)) {
             return "Discount 30%";
         }
-        else if ("Ohio".equals(stateName)) {
+        else if ("OH".equals(stateName)) {
             return "Discount 10%";
         }
         else {
             return "You don't qualify discount";
         }
+    }
+
+    public boolean checkAddressQualification() {
+        if (applicationService.getCurrenntState().equals("GA")) {
+            if (applicationService.getProtectedCity().equals("Cumming")) {
+                if (getPrivateAddress().equals("Shiloh Farms")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private String getPrivateAddress() {
+        return "Shiloh Farms";
     }
 
 }

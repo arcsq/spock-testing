@@ -11,13 +11,13 @@ class ApplicationServiceTest extends Specification {
         ApplicationService service = new ApplicationService();
 
         expect:
-        service.performBusinessFunction(id).equalsIgnoreCase(result);
+        service.getStateCode(id).equalsIgnoreCase(result);
 
         where:
-        id      | result
-        "GA"   | "Georgia"
-        "OH"  | "Ohio"
-        "IL"  | "Other"
+        id          | result
+        "Georgia"   | "GA"
+        "Ohio"      | "OH"
+        "Illinois"  | "Other"
     }
 
 }

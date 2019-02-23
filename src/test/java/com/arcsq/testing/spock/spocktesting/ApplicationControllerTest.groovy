@@ -14,20 +14,26 @@ class ApplicationControllerTest extends Specification {
         controller.checkDiscount(id).equalsIgnoreCase(discount);
 
         where:
-        id      | discount
-        "GA"    | "Discount 30%"
-        "OH"    | "Discount 10%"
-        "IL"    | "You don't qualify discount"
+        id          | discount
+        "Georgia"   | "Discount 30%"
+        "Ohio"      | "Discount 10%"
+        "Illinois"  | "You don't qualify discount"
     }
 
-    def "testing mocked service" () {
+    @Unroll
+    def "testing mocked service with #state resulting #qualification" () {
         given:
-        ApplicationService mockService = Mock(ApplicationService);
+        ApplicationService mockService = Spy(ApplicationService);
         ApplicationController controller = new ApplicationController(applicationService: mockService);
-        mockService.performBusinessFunction("GA") >> "Florida";
+        mockService.getCurrenntState() >> state;
 
         expect:
-        controller.checkDiscount("GA").equalsIgnoreCase("You don't qualify discount");
+        controller.checkAddressQualification() == qualification;
+
+        where:
+        state   | qualification
+        "GA"    | true
+        "FL"    | false
     }
 
 }
