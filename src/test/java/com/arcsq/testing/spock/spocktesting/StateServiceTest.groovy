@@ -5,18 +5,19 @@ import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class ApplicationServiceTest extends Specification {
+class StateServiceTest extends Specification {
 
     @Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver")
 
     def setupSpec() {
+        println "Setting up db";
         sql.execute("create table test (id int primary key)");
     }
 
     @Unroll
-    def "test if parameter #id and #result"() {
+    def "if state name is #id the return code is #result"() {
         given:
-        ApplicationService service = new ApplicationService();
+        StateService service = new StateService();
 
         expect:
         service.getStateCode(id).equalsIgnoreCase(result);
@@ -26,6 +27,18 @@ class ApplicationServiceTest extends Specification {
         "Georgia"   | "GA"
         "Ohio"      | "OH"
         "Illinois"  | "Other"
+        "else"  | "Wrong"
+    }
+
+    def "Throwing NullPointerException"() {
+        setup:
+        ApplicationController controller;
+
+        when:
+        controller.checkAddressQualification();
+
+        then:
+        thrown NullPointerException;
     }
 
 }

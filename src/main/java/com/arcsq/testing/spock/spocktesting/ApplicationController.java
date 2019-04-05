@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 public class ApplicationController {
 
     @Autowired
-    ApplicationService applicationService;
+    StateService stateService;
 
     @GetMapping("/check-discount/{id}")
     public String checkDiscount(@PathVariable String id) {
-        String stateName = applicationService.getStateCode(id);
+        String stateName = stateService.getStateCode(id);
         if ("GA".equals(stateName)) {
             return "Discount 30%";
         }
@@ -24,18 +24,12 @@ public class ApplicationController {
     }
 
     public boolean checkAddressQualification() {
-        if (applicationService.getCurrenntState().equals("GA")) {
-            if (applicationService.getProtectedCity().equals("Cumming")) {
-                if (getPrivateAddress().equals("Shiloh Farms")) {
-                    return true;
-                }
+        if (stateService.getCurrenntState().equals("GA")) {
+            if (stateService.getProtectedCity().equals("Cumming")) {
+                return true;
             }
         }
         return false;
-    }
-
-    private String getPrivateAddress() {
-        return "Shiloh Farms";
     }
 
 }

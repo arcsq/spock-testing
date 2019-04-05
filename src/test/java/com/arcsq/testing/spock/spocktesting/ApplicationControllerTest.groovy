@@ -6,9 +6,9 @@ import spock.lang.Unroll
 class ApplicationControllerTest extends Specification {
 
     @Unroll
-    def "test state #id and resulting discount #discount "() {
+    def "For state #id the resulting discount is #discount "() {
         given:
-        ApplicationController controller = new ApplicationController(applicationService: new ApplicationService());
+        ApplicationController controller = new ApplicationController(stateService: new StateService());
 
         expect:
         controller.checkDiscount(id).equalsIgnoreCase(discount);
@@ -21,11 +21,11 @@ class ApplicationControllerTest extends Specification {
     }
 
     @Unroll
-    def "testing mocked service with #state resulting #qualification" () {
+    def "For mocked getCurrentState to return #state, resulting address qualification is #qualification" () {
         given:
-        ApplicationService mockService = Spy(ApplicationService);
-        ApplicationController controller = new ApplicationController(applicationService: mockService);
+        StateService mockService = Spy(StateService);
         mockService.getCurrenntState() >> state;
+        ApplicationController controller = new ApplicationController(stateService: mockService);
 
         expect:
         controller.checkAddressQualification() == qualification;

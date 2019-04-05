@@ -3,7 +3,7 @@ package com.arcsq.testing.spock.spocktesting;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ApplicationService {
+public class StateService {
 
     public String getStateCode(String id) {
         if ("Georgia".equals(id)) {
