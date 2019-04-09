@@ -12,6 +12,9 @@ public class StateService {
         else if ("Ohio".equals(id)) {
             return "OH";
         }
+        else if ("Kentucky".equals(id)) {
+            return "KY";
+        }
         return "Other";
     }
 

@@ -27,7 +27,8 @@ class StateServiceTest extends Specification {
         "Georgia"   | "GA"
         "Ohio"      | "OH"
         "Illinois"  | "Other"
-        "else"  | "Wrong"
+        "Kentucky"  | "KY"
+        "else"  | "Other"
     }
 
     def "Throwing NullPointerException"() {

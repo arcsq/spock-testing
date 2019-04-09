@@ -29,11 +29,13 @@ class ApplicationControllerTest extends Specification {
 
         expect:
         controller.checkAddressQualification() == qualification;
+        controller.checkAddressQualification() == qualification;
 
         where:
         state   | qualification
         "GA"    | true
         "FL"    | false
+        "KY"    | true
     }
 
 }
