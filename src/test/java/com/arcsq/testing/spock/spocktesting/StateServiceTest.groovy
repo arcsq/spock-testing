@@ -31,6 +31,18 @@ class StateServiceTest extends Specification {
         "else"  | "Other"
     }
 
+    @Unroll
+    def "CSV-data-provided if state name is #id the return code is #result"() {
+        given:
+        StateService service = new StateService();
+
+        expect:
+        service.getStateCode(id).equalsIgnoreCase(result);
+
+        where:
+        [id, result] << new CsvProvider("state-data.csv").provide();
+    }
+
     def "Throwing NullPointerException"() {
         setup:
         ApplicationController controller;
